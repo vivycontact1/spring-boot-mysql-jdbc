@@ -71,7 +71,7 @@ public class FileController {
 	}
 	
 	 @RequestMapping(value = "/fileupload", headers=("content-type=multipart/*"), method = RequestMethod.POST)
-	public ResponseEntity<Integer> upload(@RequestParam("file") MultipartFile inputFile, @RequestParam("capabilityId") int capabilityId) {
+	public ResponseEntity<Integer> upload(@RequestParam("file") MultipartFile inputFile) {
 		 Integer result = -1;
 		 FileModel fileModel = new FileModel();
 		 HttpHeaders headers = new HttpHeaders();
@@ -89,7 +89,7 @@ public class FileController {
 				}
 				String fileName = originalFilename.substring(0,index);
 				String extension = originalFilename.substring(index,originalFilename.length());
-				File destinationFile = new File(System.getProperty("user.home") + File.separator +"showtime_files" +File.separator +fileName+"_"+System.currentTimeMillis()+extension);
+				File destinationFile = new File(System.getProperty("user.home") + File.separator +"some_folder" +File.separator +fileName+"_"+System.currentTimeMillis()+extension);
 				inputFile.transferTo(destinationFile);
 				fileModel.setFileName(destinationFile.getName());
 				fileModel.setFileSize(inputFile.getSize());
